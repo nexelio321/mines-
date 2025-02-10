@@ -9,7 +9,7 @@ async function predictMines() {
     }
 
     try {
-        let response = await fetch("http://localhost:5000/predict-mines", {
+        let response = await fetch("https://stake-predictor-api.railway.app/predict-mines", {  // 👈 CHANGE THIS TO YOUR DEPLOYED URL
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ serverSeed, clientSeed, mineCount })
@@ -24,20 +24,5 @@ async function predictMines() {
         displayMines(data.mines);
     } catch (error) {
         alert("Server error! Make sure backend is running.");
-    }
-}
-
-function displayMines(mines) {
-    let grid = document.getElementById("mine-grid");
-    grid.innerHTML = "";
-
-    for (let i = 0; i < 25; i++) {
-        let box = document.createElement("div");
-        box.classList.add("mine-box");
-        if (mines.includes(i)) {
-            box.classList.add("mine");
-            box.innerText = "💣";
-        }
-        grid.appendChild(box);
     }
 }
